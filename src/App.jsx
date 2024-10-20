@@ -7,6 +7,7 @@ import MyEvents from "./MyEvents";
 import MyAttendances from "./MyAttendances";
 import Login from "./Login";
 import Signup from "./Signup";
+import EventDetails from "./EventDetails";
 import NotFound from "./NotFound";
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
                     <Route path="/register-attendance" element={<RegisterAttendance />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
+                    <Route path="/event-details" element={<EventDetails />} />
                 </Route>
                 <Route path="*" element={<NotFound />} />
             </Routes>

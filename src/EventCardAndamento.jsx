@@ -1,4 +1,5 @@
-const EventCard = () => {
+const EventCardAndamento = () => {
+    // Arquivo criado apenas para apresentação do frontend
     return (
         <>  
         <div className="col-sm-6 col-md-4 mb-3 ">
@@ -6,7 +7,7 @@ const EventCard = () => {
                 <div className="card-body">
                     <div className="d-flex justify-content-between align-items-center">
                         <h5 className="card-title">Título Evento</h5>
-                        <span className="badge rounded-pill text-bg-primary mb-2">Não Iniciado</span>
+                        <span className="badge rounded-pill text-bg-success mb-2">Em Andamento</span>
                     </div>
                     <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, similique pariatur? Consectetur pariatur obcaecati ab.</p>
                     <div className="d-flex flex-column">
@@ -32,4 +33,4 @@ const EventCard = () => {
     );
 }
 
-export default EventCard;
+export default EventCardAndamento;

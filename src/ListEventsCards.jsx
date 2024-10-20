@@ -1,4 +1,6 @@
 import EventCard from "./EventCard";
+import EventCardAndamento from "./EventCardAndamento";
+import EventCardFinalizado from "./EventCardFinalizado";
 
 const ListEventsCards = () => {
     return (
@@ -6,8 +8,10 @@ const ListEventsCards = () => {
             <div className="py-3">
                 <hr />
                 <div className="row">
-                    
-                    {[...Array(6)].map((_, index) => (
+                    <EventCard />
+                    <EventCardAndamento />
+                    <EventCardFinalizado />
+                    {[...Array(3)].map((_, index) => (
                         <EventCard key={index} />
                     ))}
                     
