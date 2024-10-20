@@ -10,8 +10,8 @@ const Header = () => {
                         <img src="logo192.png" alt="" width="30" height="30" className="d-inline-block align-top" />
                         Sistema de Prova de Presença
                     </NavLink>
-                    <NavLink className="nav-item nav-link" to="/register-event">Meus Eventos</NavLink>
-                    <NavLink className="nav-item nav-link" to="/register-attendance">Minhas Presenças</NavLink>
+                    <NavLink className="nav-item nav-link" to="/my-events">Meus Eventos</NavLink>
+                    <NavLink className="nav-item nav-link" to="/my-attendances">Minhas Presenças</NavLink>
                 </div>
                 <div className="ml-auto"> 
                     <NavLink className="nav-item nav-link" to="/login">
