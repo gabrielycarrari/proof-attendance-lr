@@ -7,7 +7,7 @@ const Header = () => {
             <div className="container-fluid">
                 <div className="nav navbar-nav">
                     <NavLink className="nav-item nav-link" to="/">
-                        <img src="logo192.png" alt="" width="30" height="30" className="d-inline-block align-top" />
+                        <img src="src\assets\logo.png" alt="" width="30" height="30" className="d-inline-block align-top" />
                         Sistema de Prova de Presença
                     </NavLink>
                     <NavLink className="nav-item nav-link" to="/my-events">Meus Eventos</NavLink>

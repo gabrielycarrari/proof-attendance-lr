@@ -31,7 +31,7 @@ const Login = () => {
                             <div className="d-flex justify-content-center pb-4">
                                 <div className="form-check form-check-inline">
                                     <input className="form-check-input" type="radio" name="tipoPessoa" id="participante" value="participante" />
-                                    <label className="form-check-label" for="participante">Sou Participante</label>
+                                    <label className="form-check-label" htmlFor="participante">Sou Participante</label>
                                 </div>
 
                                 <div className="form-check form-check-inline">

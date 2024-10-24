@@ -13,8 +13,8 @@ const RegisterEvent = () => {
                                 <label htmlFor="nome">Nome Evento</label>
                             </div>
 
-                            <div class="form-floating mb-4">
-                                <textarea class="form-control" placeholder="Descrição" id="descricao" style={{ height: '100px' }}></textarea>
+                            <div className="form-floating mb-4">
+                                <textarea className="form-control" placeholder="Descrição" id="descricao" style={{ height: '100px' }}></textarea>
                                 <label htmlFor="descricao">Descrição</label>
                             </div>
 
