@@ -21,32 +21,19 @@ const EventDetails = () => {
                             </p>
                         </div>
                         <div className="pb-3">
-                            <span class="badge rounded-pill text-bg-primary">Não Iniciado</span>
+                            <span className="badge rounded-pill text-bg-primary">Não Iniciado</span>
                         </div>
                         <button className="btn btn-outline-primary btn-sm ">
-                            <i class="bi bi-pencil-square pe-2"></i>Editar informações
+                            <i className="bi bi-pencil-square pe-2"></i>Editar informações
                         </button>
                         <hr className="pt-3" />
                         <h5 className="card-title">Participantes:</h5>
                         <p className="card-text text-secondary"> Total: 3</p>
                             
                         <ul className="list-group list-group-flush">
-                            <li className="list-group-item">
-                                Participante 1
-                                <button className="btn btn-outline-success btn-sm float-end">
-                                    <i class="bi bi-award-fill pe-2"></i>Emitir Certificado
-                                </button>
-                            </li>
-                            <li className="list-group-item">Participante 2
-                                <button className="btn btn-success btn-sm float-end" disabled>
-                                    <i class="bi bi-check-circle-fill pe-2"></i>Emitido
-                                </button>
-                            </li>
-                            <li className="list-group-item">Participante 3
-                                <button className="btn btn-success btn-sm float-end" disabled>
-                                    <i class="bi bi-check-circle-fill pe-2"></i>Emitido
-                                </button>
-                            </li>
+                            <li className="list-group-item">Participante 1</li>
+                            <li className="list-group-item">Participante 2</li>
+                            <li className="list-group-item">Participante 3</li>
                         </ul>
 
                     </div>
