@@ -1,4 +1,39 @@
+import FormInput from "./FormInput";
+import handleChange from './js/handleChange';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { login } from './js/authService';
+
 const Login = () => {
+    const [inputs, setInputs] = useState({});
+    const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+        setLoading(true);
+        let perfil = await login(inputs.email, inputs.senha);
+        
+        if (perfil == 0) {
+            
+            navigate('/my-events');
+            window.location.reload();
+        }else if (perfil == 1) {
+            navigate('/my-attendances');
+            window.location.reload();
+        } else {
+            //TODO: Tratar erro de cadastro
+            setErrors({ email: "E-mail ou senha inválidos" });
+        }
+       
+        setLoading(false);
+    }
+
+    function localHandleChange(event) {
+        handleChange(event, inputs, setInputs);
+    }
+
     return (
         <>
         <section className="pt-5">
@@ -9,16 +44,9 @@ const Login = () => {
                     </div>
                     <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                         <h1 className="mb-5 text-center pt-3">Login</h1>    
-                        <form>
-                            <div className="form-floating mb-4">
-                                <input type="email" className="form-control" id="email" placeholder="name@example.com" />
-                                <label htmlFor="email">Email</label>
-                            </div>
-
-                            <div className="form-floating  mb-2">
-                                <input type="password" className="form-control" id="password" placeholder="Password" />
-                                <label htmlFor="password">Senha</label>
-                            </div>
+                        <form onSubmit={handleSubmit}>
+                            <FormInput type="email" field="email" label="E-mail" onChange={localHandleChange} error={errors?.email} autofocus={true} value={inputs?.email} />
+                            <FormInput type="password" field="senha" label="Senha" onChange={localHandleChange} error={errors?.senha} value={inputs?.senha} />
 
                             <div className="d-flex justify-content-around align-items-center mb-5">
                                 <a href="#!">Esqueceu a senha?</a>

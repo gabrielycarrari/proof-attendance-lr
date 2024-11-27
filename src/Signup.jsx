@@ -5,24 +5,24 @@ import { useState } from 'react';
 import { signup } from './js/authService';
 
 const Signup = () => {
-
     const [inputs, setInputs] = useState({});
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
         setLoading(true);
         
-        if (signup(inputs.nome, inputs.cpf, inputs.email, inputs.senha, inputs.confirmarSenha, inputs.perfil)) {
-            if (inputs.perfil == 0) navigate('/my-events') 
+        let perfil = await signup(inputs.nome, inputs.cpf, inputs.email, inputs.senha, inputs.confirmarSenha, inputs.perfil);
+        if (perfil == 0) {
+            navigate('/my-events');
+        }else if (perfil == 1) {
             navigate('/my-attendances');
         } else {
             //TODO: Tratar erro de cadastro
             setErrors({ email: "E-mail ou senha inválidos" });
         }
-       
         setLoading(false);
     }
 
