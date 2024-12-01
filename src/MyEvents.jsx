@@ -1,7 +1,36 @@
 import ListEventsCards from './ListEventsCards';
 import { NavLink } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { getUserId } from './js/authService';
+import api from "./js/axiosApi";
 
 const RegisterEvent = () => {
+    const [events, setEvents] = useState([]);
+    const [selectedEventId, setSelectedEventId] = useState(0);
+    const [loading, setLoading] = useState(true);
+
+    const loadEvents = () => {
+        setLoading(true);
+        const id_organizador = getUserId()
+        api.get(`obter_eventos/${id_organizador}`)
+            .then((response) => {
+                setEvents(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }
+
+    const handleSeeDetails = (eventId) => {
+        setSelectedEventId(eventId);
+        
+    }
+
+    useEffect(() => {loadEvents()},[]);
+
     return (
         <>
             <h1 className='pt-5 pb-3'>Meus Eventos</h1>
@@ -14,7 +43,7 @@ const RegisterEvent = () => {
                 </button>
             </NavLink>
        
-            <ListEventsCards />
+            <ListEventsCards items={events} handleSeeDetails={handleSeeDetails}/>
         </>
     );
 }

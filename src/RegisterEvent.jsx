@@ -1,4 +1,40 @@
+import FormInput from "./FormInput";
+import handleChange from './js/handleChange';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { signup } from './js/authService';
+import FormTextarea from "./FormTextArea";
+
+
+
 const RegisterEvent = () => {
+    const [inputs, setInputs] = useState({});
+    const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+        setLoading(true);
+
+        console.log(inputs);
+        let evento = await register_event(inputs.nome, inputs.descricao, inputs.cargaHoraria, inputs.data, inputs.hora);
+        // let perfil = await signup(inputs.nome, inputs.cpf, inputs.email, inputs.senha, inputs.confirmarSenha, inputs.perfil);
+        // if (perfil == 0) {
+        //     navigate('/my-events');
+        // }else if (perfil == 1) {
+        //     navigate('/my-attendances');
+        // } else {
+        //     //TODO: Tratar erro de cadastro
+        //     setErrors({ email: "E-mail ou senha inválidos" });
+        // }
+        setLoading(false);
+    }
+
+    function localHandleChange(event) {
+        handleChange(event, inputs, setInputs);
+    }
+
     return (
         <>
         <section className="pt-5">
@@ -7,34 +43,19 @@ const RegisterEvent = () => {
                     
                     <div className="col-md-7 col-lg-7 col-xl-7">
                         <h1 className="mb-5 text-center pt-3">Cadastre um Novo Evento</h1>
-                        <form>
-                            <div className="form-floating mb-4 ">
-                                <input type="text" className="form-control" id="nome" placeholder=" " />
-                                <label htmlFor="nome">Nome Evento</label>
-                            </div>
-
-                            <div className="form-floating mb-4">
-                                <textarea className="form-control" placeholder="Descrição" id="descricao" style={{ height: '100px' }}></textarea>
-                                <label htmlFor="descricao">Descrição</label>
-                            </div>
-
-                            <div className="form-floating mb-4 ">
-                                <input type="number" className="form-control" id="nome" placeholder=" " />
-                                <label htmlFor="nome">Carga Horária (Em horas)</label>
-                            </div>
+                        <form onSubmit={handleSubmit}>
+                            <FormInput type="text" field="nome" label="Nome Evento" onChange={localHandleChange} error={errors?.nome} value={inputs?.nome} />
+                            
+                            <FormTextarea field="descricao" label="Descrição" value={inputs?.descricao} onChange={localHandleChange} error={errors?.descricao} />  
+                            
+                            <FormInput type="number" field="cargaHoraria" label="Carga Horária (Em horas)" onChange={localHandleChange} error={errors?.cargaHoraria} value={inputs?.cargaHoraria} />
 
                             <div className="row mb-4">
                                 <div className="col">
-                                    <div className="form-floating">
-                                        <input type="date" className="form-control" id="data" placeholder=" " />
-                                        <label htmlFor="data">Data</label>
-                                    </div>
+                                    <FormInput type="date" field="data" label="Data" onChange={localHandleChange} error={errors?.data} value={inputs?.data} />
                                 </div>
                                 <div className="col">
-                                    <div className="form-floating">
-                                        <input type="time" className="form-control" id="hora" placeholder=" " />
-                                        <label htmlFor="hora">Hora de Início</label>
-                                    </div>
+                                    <FormInput type="time" field="hora" label="Hora de Início" onChange={localHandleChange} error={errors?.hora} value={inputs?.hora} />
                                 </div>
                             </div>
 

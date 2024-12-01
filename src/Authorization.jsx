@@ -3,7 +3,6 @@ import { isLoggedIn, getUserProfile } from './js/authService';
 import { Navigate } from 'react-router-dom';
 
 const Authorization = ({ children, allowedProfile }) => {
-    console.log("allowedProfile: " + allowedProfile);
     if (!isLoggedIn() && allowedProfile !== null) {
         return <Navigate to="/login" />;
     }

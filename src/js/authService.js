@@ -72,6 +72,11 @@ export const getUserProfile = () => {
     return usuario ? usuario.perfil : null;
 };
 
+export const getUserId = () => {
+    const usuario = getUsuario();
+    return usuario ? usuario.id : null;
+};
+
 export const isAdmin = () => {
     const token = getToken();
     if (token) {

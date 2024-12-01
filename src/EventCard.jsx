@@ -1,21 +1,25 @@
-const EventCard = () => {
+import { DateFormatter, StringFormatter } from "./js/formatters"
+
+
+const EventCard = ({item , handleSeeDetails}) => {
+    const data_inicio = new Date(item.data_inicio);
     return (
         <>  
         <div className="col-sm-6 col-md-4 mb-3 ">
             <div className="card">
                 <div className="card-body">
                     <div className="d-flex justify-content-between align-items-center">
-                        <h5 className="card-title">Título Evento</h5>
+                        <h5 className="card-title">{StringFormatter.Capitalize(item.nome)}</h5>
                         <span className="badge rounded-pill text-bg-primary mb-2">Não Iniciado</span>
                     </div>
-                    <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, similique pariatur? Consectetur pariatur obcaecati ab.</p>
+                    <p className="card-text">{item.descricao}</p>
                     <div className="d-flex flex-column">
                         <p className="card-text mb-1" >
-                            <i className="bi bi-calendar2-event-fill pe-2"></i>24/10/2024
-                            <i className="bi bi-clock-fill pe-2 ps-4"></i>13:00
+                            <i className="bi bi-calendar2-event-fill pe-2"></i>{DateFormatter.format(data_inicio)}
+                            <i className="bi bi-clock-fill pe-2 ps-4"></i>{item.hora_inicio}
                         </p>
                         <p className="card-text mb-1">
-                            <i className="bi bi-hourglass-split pe-2"></i>Carga Horária: 2h
+                            <i className="bi bi-hourglass-split pe-2"></i>Carga Horária: {item.carga_horaria}h
                         </p>
                         <p className="card-text mb-2">
                             <i className="bi bi-people-fill pe-2"></i>Total Participantes: 3
@@ -23,8 +27,11 @@ const EventCard = () => {
                     </div>
 
                     <div className="d-flex justify-content-end">
-                        <a href="/event-details" className="btn btn-outline-primary text-end">Ver Detalhes</a>
+                        <button className="btn btn-outline-primary text-end" title="Ver Detalhes" onClick={() => handleSeeDetails(item.id)}>
+                            Ver Detalhes
+                        </button>
                     </div>
+                    
                 </div>
             </div>
         </div>       

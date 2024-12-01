@@ -38,7 +38,7 @@ const Signup = () => {
                     
                     <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                         <h1 className="mb-4 text-center pt-3">Cadastro</h1>
-                        <form onSubmit={handleSubmit}  autoComplete="off" >
+                        <form onSubmit={handleSubmit} autoComplete="off" >
                             <FormInput type="text" field="nome" label="Nome Completo" onChange={localHandleChange} error={errors?.nome} value={inputs?.nome} />
                             <FormInput type="text" field="cpf" label="CPF" onChange={localHandleChange} error={errors?.cpf} value={inputs?.cpf} />
                             <FormInput type="email" field="email" label="E-mail" onChange={localHandleChange} error={errors?.email} autofocus={true} value={inputs?.email} />
