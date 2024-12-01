@@ -1,8 +1,25 @@
+/* eslint-disable react/prop-types */
 import { DateFormatter, StringFormatter } from "./js/formatters"
 
 
 const EventCard = ({item , handleSeeDetails}) => {
-    const data_inicio = new Date(item.data_inicio);
+    const now = new Date();
+    const data_inicio = new Date(`${item.data_inicio}T${item.hora_inicio}:00`);
+    const data_fim = new Date(data_inicio); 
+    data_fim.setHours(data_inicio.getHours() + item.carga_horaria); 
+
+    let status = "";
+    let badgeClass = "";
+    if (now < data_inicio) {
+        status = "Não Iniciado";
+        badgeClass = "text-bg-primary";
+    } else if (now >= data_inicio && now <= data_fim) {
+        status = "Em Andamento";
+        badgeClass = "text-bg-success";
+    } else {
+        status = "Finalizado";
+        badgeClass = "text-bg-secondary";
+    }
     return (
         <>  
         <div className="col-sm-6 col-md-4 mb-3 ">
@@ -10,7 +27,7 @@ const EventCard = ({item , handleSeeDetails}) => {
                 <div className="card-body">
                     <div className="d-flex justify-content-between align-items-center">
                         <h5 className="card-title">{StringFormatter.Capitalize(item.nome)}</h5>
-                        <span className="badge rounded-pill text-bg-primary mb-2">Não Iniciado</span>
+                        <span className={`badge rounded-pill ${badgeClass} mb-2`}>{status}</span>
                     </div>
                     <p className="card-text">{item.descricao}</p>
                     <div className="d-flex flex-column">

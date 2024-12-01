@@ -53,7 +53,7 @@ const Header = () => {
                                         onClick={() => {
                                             logout(); // Faz logout
                                             navigate('/');
-                                            window.location.reload();
+                                            // window.location.reload();
                                         }}
                                     >
                                         Logout

@@ -2,8 +2,9 @@ import FormInput from "./FormInput";
 import handleChange from './js/handleChange';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { signup } from './js/authService';
+import { getUsuario } from './js/authService';
 import FormTextarea from "./FormTextArea";
+import api from "./js/axiosApi";
 
 
 
@@ -17,17 +18,42 @@ const RegisterEvent = () => {
         event.preventDefault();
         setLoading(true);
 
-        console.log(inputs);
-        let evento = await register_event(inputs.nome, inputs.descricao, inputs.cargaHoraria, inputs.data, inputs.hora);
-        // let perfil = await signup(inputs.nome, inputs.cpf, inputs.email, inputs.senha, inputs.confirmarSenha, inputs.perfil);
-        // if (perfil == 0) {
-        //     navigate('/my-events');
-        // }else if (perfil == 1) {
-        //     navigate('/my-attendances');
-        // } else {
-        //     //TODO: Tratar erro de cadastro
-        //     setErrors({ email: "E-mail ou senha inválidos" });
-        // }
+        let user = getUsuario();
+
+        if (user === null) {
+            navigate("/login");
+            return;
+        }
+        if (user.perfil !== 0) {
+            //TODO: disparar erro
+            navigate("/");
+            return;
+        }
+
+        await api.post("/cadastrar_evento", { 
+            "nome": inputs.nome,
+            "descricao": inputs.descricao,
+            "carga_horaria": inputs.cargaHoraria,
+            "data_inicio": inputs.data,
+            "hora_inicio": inputs.hora,
+            "id_organizador": user.id
+        })
+        .then((response) => {
+            if (response.status === 200) {
+                if (response.data) {
+                    // TODO: Adicionar feedback de sucesso
+                    console.log("Evento cadastrado com sucesso");
+                    navigate("/my-events");
+                }
+            } else {
+                //TODO: Adicionar feedback de erro
+                console.log("Signup error: " + response);
+            }
+        })
+        .catch((error) => {
+            console.log(error.message);
+        });
+
         setLoading(false);
     }
 

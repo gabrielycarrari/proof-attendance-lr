@@ -77,26 +77,6 @@ export const getUserId = () => {
     return usuario ? usuario.id : null;
 };
 
-export const isAdmin = () => {
-    const token = getToken();
-    if (token) {
-        const decoded = jwt(token);
-        return (decoded.perfil === 0);
-    } else {
-        return false;
-    }
-};
-
 export const isLoggedIn = () => {
     return getUsuario() !== null;
-};
-
-
-export const authHeader = () => {
-    const token = getToken();
-    if (token) {
-        return { "x-access-token": token };
-    } else {
-        return {};
-    }
 };

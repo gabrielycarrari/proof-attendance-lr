@@ -7,27 +7,27 @@ import { login } from './js/authService';
 const Login = () => {
     const [inputs, setInputs] = useState({});
     const [errors, setErrors] = useState({});
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     async function handleSubmit(event) {
         event.preventDefault();
-        setLoading(true);
+        // setLoading(true);
         let perfil = await login(inputs.email, inputs.senha);
         
         if (perfil == 0) {
             
             navigate('/my-events');
-            window.location.reload();
+            // window.location.reload();
         }else if (perfil == 1) {
-            navigate('/my-attendances');
+            // navigate('/my-attendances');
             window.location.reload();
         } else {
             //TODO: Tratar erro de cadastro
             setErrors({ email: "E-mail ou senha inválidos" });
         }
        
-        setLoading(false);
+        // setLoading(false);
     }
 
     function localHandleChange(event) {
