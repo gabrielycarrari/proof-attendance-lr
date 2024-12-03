@@ -10,6 +10,7 @@ import Signup from "./Signup";
 import EventDetails from "./EventDetails";
 import NotFound from "./NotFound";
 import Authorization from "./Authorization";
+import EditEvent from "./EditEvent";
 
 const App = () => {
     return (
@@ -23,7 +24,8 @@ const App = () => {
                     <Route path="/register-attendance" element={<Authorization allowedProfile={1}><RegisterAttendance /></Authorization>} />
                     <Route path="/login" element={<Authorization allowedProfile={null}><Login /></Authorization>} />
                     <Route path="/signup" element={<Authorization allowedProfile={null}><Signup /></Authorization>} />
-                    <Route path="/event-details" element={<Authorization allowedProfile={0}><EventDetails /></Authorization>} />
+                    <Route path="/my-events/:id" element={<Authorization allowedProfile={0}><EventDetails /></Authorization>} />
+                    <Route path="/edit-event/:id" element={<Authorization allowedProfile={0}><EditEvent /></Authorization>} />
                 </Route>
                 <Route path="*" element={<NotFound />} />
             </Routes>

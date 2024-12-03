@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
 import { DateFormatter, StringFormatter } from "./js/formatters"
 
 
-const EventCard = ({item , handleSeeDetails}) => {
+const EventCard = ({item}) => {
     const now = new Date();
     const data_inicio = new Date(`${item.data_inicio}T${item.hora_inicio}:00`);
     const data_fim = new Date(data_inicio); 
@@ -44,10 +45,10 @@ const EventCard = ({item , handleSeeDetails}) => {
                     </div>
 
                     <div className="d-flex justify-content-end">
-                        <button className="btn btn-outline-primary text-end" title="Ver Detalhes" onClick={() => handleSeeDetails(item.id)}>
-                            Ver Detalhes
-                        </button>
+                        <Link to={`/my-events/${item.id}`} className="btn btn-outline-primary text-end ms-2" title="Alterar">Ver Detalhes
+                        </Link>
                     </div>
+                    
                     
                 </div>
             </div>

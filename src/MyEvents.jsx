@@ -6,7 +6,6 @@ import api from "./js/axiosApi";
 
 const RegisterEvent = () => {
     const [events, setEvents] = useState([]);
-    const [selectedEventId, setSelectedEventId] = useState(0);
     const [loading, setLoading] = useState(true);
 
     const loadEvents = () => {
@@ -24,11 +23,6 @@ const RegisterEvent = () => {
             });
     }
 
-    const handleSeeDetails = (eventId) => {
-        setSelectedEventId(eventId);
-        
-    }
-
     useEffect(() => {loadEvents()},[]);
 
     return (
@@ -43,7 +37,7 @@ const RegisterEvent = () => {
                 </button>
             </NavLink>
        
-            <ListEventsCards items={events} handleSeeDetails={handleSeeDetails}/>
+            <ListEventsCards items={events} />
         </>
     );
 }
