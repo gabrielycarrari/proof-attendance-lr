@@ -1,6 +1,11 @@
 # proof-attendance-lr
 Sistema de prova de presença desenvolvido para as aulas de Laboratório de Redes 
 
+Instale as dependências do mkcert, no cmd, como admin:
+choco install mkcert (necessário ter o chocolatey instalado)
+mkcert -install
+mkcert localhost
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
