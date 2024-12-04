@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {DateFormatter, StringFormatter } from './js/formatters';
+import ModalConfirm from "./ModalConfirm";
 import api from './js/axiosApi';
 
 
@@ -52,7 +53,27 @@ const EventDetails = () => {
         badgeClass = "text-bg-secondary";
     }
 
+    const deleteEvento = (eventId) => {
+        api.postForm("excluir_evento", {"id_evento": eventId})
+            .then(response => {
+                if (response.status === 204)
+                    navigate("/my-events");
+            })
+            .catch(error => {
+                console.error('Erro ao excluir evento:', error);
+            })
+            .finally(() => {
+                // setLoading(false);
+            });
+    };
+
+    const handleDeleteEvento = (eventoId) => {
+        const modal = new bootstrap.Modal(document.getElementById('modalDeleteEvento'));
+        modal.show();
+    }
+
     return (
+        <>
         <div>
             <h1 className="pt-5 pb-3">Detalhes Evento</h1>
             <div className="col my-4">
@@ -77,12 +98,19 @@ const EventDetails = () => {
                                 <i className="bi bi-clock-fill pe-2"></i>{evento.hora_inicio}
                             </p>
                         </div>
-                        <div className="pb-3">
-                            <span className={`badge rounded-pill ${badgeClass} mb-2`}>{status}</span>
+                        <div className='d-flex justify-content-between'>
+                            <div className="">
+                                <span className={`badge rounded-pill ${badgeClass} `}>{status}</span>
+                            </div>
+                            <div className='d-flex justify-content-end'>
+                                <Link to={`/edit-event/${evento.id}`} className="btn btn-outline-primary btn-sm" title="Alterar">
+                                    <i className="bi bi-pencil-square pe-2"></i>Editar informações
+                                </Link>
+                                <button className="btn btn-outline-danger btn-sm ms-1" title="Excluir" onClick={() => handleDeleteEvento(evento.id)}>
+                                    <i className="bi bi-trash"></i>Excluir Evento
+                                </button>
+                            </div>
                         </div>
-                        <Link to={`/edit-event/${evento.id}`} className="btn btn-outline-primary btn-sm" title="Alterar">
-                            <i className="bi bi-pencil-square pe-2"></i>Editar informações
-                        </Link>
 
                         <hr className="pt-3" />
                         <h5 className="card-title">Participantes:</h5>
@@ -98,6 +126,8 @@ const EventDetails = () => {
                 </div>
             </div>
         </div>
+        <ModalConfirm modalId="modalDeleteEvento" question="Deseja realmente excluir o envento?" confirmAction={() => deleteEvento(evento.id)} />
+        </>
     );
 }
 
