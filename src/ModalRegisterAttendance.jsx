@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import {DateFormatter, StringFormatter } from './js/formatters';
+import { useNavigate } from 'react-router-dom';
+import { DateFormatter, StringFormatter } from './js/formatters';
 import { getUsuario } from './js/authService';
 import api from "./js/axiosApi";
 
 const ModalRegisterAttendance = ({ evento }) => {
-    const [isChecked, setIsChecked] = useState(false); 
+    const [isChecked, setIsChecked] = useState(false);
+    const navigate = useNavigate(); 
 
     const handleCheckboxChange = (event) => {
         setIsChecked(event.target.checked);

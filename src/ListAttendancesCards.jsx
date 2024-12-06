@@ -1,15 +1,12 @@
 import AttendanceCard from "./AttendanceCard";
 
-const ListAttendancesCards = () => {
+const ListAttendancesCards = ({items}) => {
     return (
         <>  
             <div className="py-3">
                 <hr />
                 <div className="row pt-3">
-                    {[...Array(3)].map((_, index) => (
-                        <AttendanceCard key={index} />
-                    ))}
-                    
+                    {items.map(u => <AttendanceCard item={u} key={u.id} />)}
                 </div>
             </div>
         </>

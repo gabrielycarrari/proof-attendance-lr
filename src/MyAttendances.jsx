@@ -3,14 +3,14 @@ import ModalRegisterAttendance from './ModalRegisterAttendance';
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import api from './js/axiosApi';
+import { getUserId } from './js/authService';
 
 const MyAttendances = () => {
     const [evento, setEvento] = useState(null);
     const [eventKey, setEventKey] = useState('');  
+    const [attendances, setAttendances] = useState([]);
 
     const handleFindEvent = (eventKey) => {
-        console.log('Buscando evento com chave:', eventKey);
-        console.log(eventKey);
         api.get(`obter_evento_por_chave/${eventKey}`)
             .then((response) => {
                 setEvento(response.data);
@@ -31,9 +31,25 @@ const MyAttendances = () => {
     }
 
     const handleInputChange = (e) => {
-        console.log(e.target.value);
         setEventKey(e.target.value);
     }
+
+    const loadAttendances = () => {
+        // setLoading(true);
+        const id_participante = getUserId()
+        api.get(`obter_presencas/${id_participante}`)
+            .then((response) => {
+                setAttendances(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+            .finally(() => {
+                // setLoading(false);
+            });
+    }
+
+    useEffect(() => {loadAttendances()},[]);
 
     return (
         <>
@@ -52,7 +68,7 @@ const MyAttendances = () => {
                 </form>
             </div>
        
-            <ListAttendancesCards />
+            <ListAttendancesCards items={attendances}/>
             
             <ModalRegisterAttendance evento={evento}/>
             
