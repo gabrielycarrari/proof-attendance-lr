@@ -14,7 +14,6 @@ const MyAttendances = () => {
         api.get(`obter_evento_por_chave/${eventKey}`)
             .then((response) => {
                 setEvento(response.data);
-                console.log(response.data);
                 handleRegisterAttendance();
             })
             .catch((error) => {
@@ -67,8 +66,12 @@ const MyAttendances = () => {
                     </div>
                 </form>
             </div>
-       
-            <ListAttendancesCards items={attendances}/>
+            {attendances.length > 0 ? (
+                <ListAttendancesCards items={attendances} />
+            ) : (
+                <p className="mt-5">Nenhuma presença encontrada.</p>
+            )}
+            {/* <ListAttendancesCards items={attendances}/> */}
             
             <ModalRegisterAttendance evento={evento}/>
             

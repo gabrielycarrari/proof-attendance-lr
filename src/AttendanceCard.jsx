@@ -13,20 +13,21 @@ const AttendanceCard = ({item}) => {
         modal.show();
     }
 
-    useEffect(() => {
-        const id_evento = item.id_evento
-        api.get(`obter_evento/${id_evento}`)
-            .then((response) => {
-                console.log(response.data);
-                setEvento(response.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, [item]);
+    // useEffect(() => {
+    //     console.log("item:", item);
+    //     const id_evento = item.id_evento
+    //     api.get(`obter_evento/${id_evento}`)
+    //         .then((response) => {
+    //             console.log(response.data);
+    //             setEvento(response.data);
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         });
+    // }, [item]);
 
     const now = new Date();
-    const data_inicio = new Date(`${item.data_inicio}T${item.hora_inicio}:00`);
+    const data_inicio = new Date(`${item.data_inicio}T${item.hora_inicio}`);
     const data_fim = new Date(data_inicio); 
     data_fim.setHours(data_inicio.getHours() + item.carga_horaria); 
 
@@ -49,20 +50,20 @@ const AttendanceCard = ({item}) => {
             <div className="card">
                 <div className="card-body">
                     <div className="d-flex justify-content-between align-items-center">
-                        <h5 className="card-title">{evento.nome}</h5>
+                        <h5 className="card-title">{item.nome}</h5>
                         <span className={`badge rounded-pill ${badgeClass} mb-2`}>{status}</span>
                     </div>
-                    <p className="card-text">{evento.descricao}</p>
+                    <p className="card-text">{item.descricao}</p>
                     <div className="d-flex flex-column">
                         <p className="card-text mb-1" >
                             <i className="bi bi-calendar2-event-fill pe-2"></i>{DateFormatter.format(data_inicio)}
-                            <i className="bi bi-clock-fill pe-2 ps-4"></i>{evento.hora_inicio}
+                            <i className="bi bi-clock-fill pe-2 ps-4"></i>{item.hora_inicio}
                         </p>
                         <p className="card-text mb-1">
-                            <i className="bi bi-hourglass-split pe-2"></i>Carga Horária: {evento.carga_horaria}h
+                            <i className="bi bi-hourglass-split pe-2"></i>Carga Horária: {item.carga_horaria}h
                         </p>
                         <p className="card-text mb-2">
-                            <i className="bi bi-people-fill pe-2"></i>Total Participantes: 3
+                            <i className="bi bi-people-fill pe-2"></i>Total Participantes: {item.qtd_participantes}
                         </p>
                     </div>
 
