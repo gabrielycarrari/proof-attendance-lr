@@ -36,9 +36,9 @@ const EventDetails = () => {
     }
 
     const now = new Date();
-    const data_inicio = new Date(`${event.data_inicio}T${event.hora_inicio}:00`);
+    const data_inicio = new Date(`${evento.data_inicio}T${evento.hora_inicio}:00`);
     const data_fim = new Date(data_inicio); 
-    data_fim.setHours(data_inicio.getHours() + event.carga_horaria); 
+    data_fim.setHours(data_inicio.getHours() + evento.carga_horaria); 
 
     let status = "";
     let badgeClass = "";
