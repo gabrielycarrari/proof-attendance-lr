@@ -34,7 +34,7 @@ const ModalRegisterAttendance = ({ evento }) => {
                 if (response.data) {
                     // TODO: Adicionar feedback de sucesso
                     console.log("Presença registrada com sucesso");
-                    navigate("/my-attendances");
+                    window.location.reload();
                 }
             } else {
                 //TODO: Adicionar feedback de erro
