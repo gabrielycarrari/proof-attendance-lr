@@ -36,8 +36,13 @@ const RegisterEvent = () => {
                     Cadastrar Novo Evento
                 </button>
             </NavLink>
+            {events.length > 0 ? (
+                <ListEventsCards items={events} />
+            ) : (
+                <p className="mt-5">Nenhum evento encontrado.</p>
+            )}
        
-            <ListEventsCards items={events} />
+            
         </>
     );
 }

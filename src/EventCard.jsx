@@ -5,7 +5,7 @@ import { DateFormatter, StringFormatter } from "./js/formatters"
 
 const EventCard = ({item}) => {
     const now = new Date();
-    const data_inicio = new Date(`${item.data_inicio}T${item.hora_inicio}:00`);
+    const data_inicio = new Date(`${item.data_inicio}T${item.hora_inicio}`);
     const data_fim = new Date(data_inicio); 
     data_fim.setHours(data_inicio.getHours() + item.carga_horaria); 
 
@@ -40,7 +40,7 @@ const EventCard = ({item}) => {
                             <i className="bi bi-hourglass-split pe-2"></i>Carga Horária: {item.carga_horaria}h
                         </p>
                         <p className="card-text mb-2">
-                            <i className="bi bi-people-fill pe-2"></i>Total Participantes: 3
+                            <i className="bi bi-people-fill pe-2"></i>Total Participantes: {item.qtd_participantes}
                         </p>
                     </div>
 

@@ -36,7 +36,7 @@ const EventDetails = () => {
     }
 
     const now = new Date();
-    const data_inicio = new Date(`${evento.data_inicio}T${evento.hora_inicio}:00`);
+    const data_inicio = new Date(`${evento.data_inicio}T${evento.hora_inicio}`);
     const data_fim = new Date(data_inicio); 
     data_fim.setHours(data_inicio.getHours() + evento.carga_horaria); 
 
@@ -98,10 +98,12 @@ const EventDetails = () => {
                                 <i className="bi bi-clock-fill pe-2"></i>{evento.hora_inicio}
                             </p>
                         </div>
+                        
                         <div className='d-flex justify-content-between'>
                             <div className="">
                                 <span className={`badge rounded-pill ${badgeClass} `}>{status}</span>
                             </div>
+                            { (data_fim > now) &&
                             <div className='d-flex justify-content-end'>
                                 <Link to={`/edit-event/${evento.id}`} className="btn btn-outline-primary btn-sm" title="Alterar">
                                     <i className="bi bi-pencil-square pe-2"></i>Editar informações
@@ -110,17 +112,18 @@ const EventDetails = () => {
                                     <i className="bi bi-trash"></i>Excluir Evento
                                 </button>
                             </div>
+                            }
                         </div>
-
+                        
                         <hr className="pt-3" />
                         <h5 className="card-title">Participantes:</h5>
-                        <p className="card-text text-secondary"> Total: 3</p>
+                        <p className="card-text text-secondary"> Total: {evento.qtd_participantes}</p>
                             
-                        <ul className="list-group list-group-flush">
+                        {/* <ul className="list-group list-group-flush">
                             <li className="list-group-item">Participante 1</li>
                             <li className="list-group-item">Participante 2</li>
                             <li className="list-group-item">Participante 3</li>
-                        </ul>
+                        </ul> */}
 
                     </div>
                 </div>
