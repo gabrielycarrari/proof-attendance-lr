@@ -10,7 +10,6 @@ const CertificateModal = ({ pdfUrl, onClose }) => {
                         <button type="button" className="btn-close" onClick={onClose}></button>
                     </div>
                     <div className="modal-body">
-                        {/* Exibe o PDF dentro do modal */}
                         <embed src={pdfUrl} width="100%" height="550" type="application/pdf" />
                     </div>
                     <div className="modal-footer">

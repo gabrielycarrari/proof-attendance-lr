@@ -4,11 +4,15 @@ import { NavLink } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import api from './js/axiosApi';
 import { getUserId } from './js/authService';
+import AlertToast from './AlertToast';
+import { set } from 'date-fns';
 
 const MyAttendances = () => {
     const [evento, setEvento] = useState(null);
     const [eventKey, setEventKey] = useState('');  
     const [attendances, setAttendances] = useState([]);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertColor, setAlertColor] = useState(''); 
 
     const handleFindEvent = (eventKey) => {
         api.get(`obter_evento_por_chave/${eventKey}`)
@@ -48,6 +52,14 @@ const MyAttendances = () => {
             });
     }
 
+    const onAttendanceRegistered = (success, message, color) => {
+        setEvento(null);
+        setEventKey('');
+        setAlertMessage(message);
+        setAlertColor(color);
+        loadAttendances();  
+    };
+
     useEffect(() => {loadAttendances()},[]);
 
     return (
@@ -71,9 +83,10 @@ const MyAttendances = () => {
             ) : (
                 <p className="mt-5">Nenhuma presença encontrada.</p>
             )}
-            {/* <ListAttendancesCards items={attendances}/> */}
             
-            <ModalRegisterAttendance evento={evento}/>
+            <ModalRegisterAttendance evento={evento} onAttendanceRegistered={onAttendanceRegistered}/>
+
+            {alertMessage && <AlertToast color={alertColor} mensage={alertMessage} />}
             
         </>
     );

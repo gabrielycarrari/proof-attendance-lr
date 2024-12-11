@@ -1,7 +1,6 @@
 import AttendanceCard from "./AttendanceCard";
 
 const ListAttendancesCards = ({items}) => {
-    // console.log("itens: ", items);
     return (
         <>  
             <div className="py-3">

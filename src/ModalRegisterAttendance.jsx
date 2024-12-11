@@ -4,7 +4,7 @@ import { DateFormatter, StringFormatter } from './js/formatters';
 import { getUsuario } from './js/authService';
 import api from "./js/axiosApi";
 
-const ModalRegisterAttendance = ({ evento }) => {
+const ModalRegisterAttendance = ({ evento, onAttendanceRegistered }) => {
     const [isChecked, setIsChecked] = useState(false);
     const navigate = useNavigate(); 
 
@@ -34,15 +34,22 @@ const ModalRegisterAttendance = ({ evento }) => {
                 if (response.data) {
                     // TODO: Adicionar feedback de sucesso
                     console.log("Presença registrada com sucesso");
-                    window.location.reload();
+                    // window.location.reload();
+                    setIsChecked(false);
+                    onAttendanceRegistered(true, 'Presença registrada com sucesso!', 'success'); 
+                    
                 }
             } else {
                 //TODO: Adicionar feedback de erro
                 console.log("Error: " + response);
+                setIsChecked(false);
+                onAttendanceRegistered(false, 'Erro ao registrar presença.', 'danger');
             }
         })
         .catch((error) => {
             console.log(error.message);
+            setIsChecked(false);
+            onAttendanceRegistered(false, 'Erro ao registrar presença: ' + error.message, 'danger');
         });
     }
 
@@ -56,6 +63,8 @@ const ModalRegisterAttendance = ({ evento }) => {
     }
 
     return (
+        <>
+        
         <div className="modal fade" id="modalRegisterAttendance" data-bs-backdrop="static" data-bs-keyboard="true" tabIndex="-1">
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
@@ -80,7 +89,7 @@ const ModalRegisterAttendance = ({ evento }) => {
                             </p>
                         </div>
                         <div className="form-check small fst-italic">
-                            <input className="form-check-input" type="checkbox" value="" id="checkAgree"  onChange={handleCheckboxChange}/>
+                            <input className="form-check-input" type="checkbox" value="" id="checkAgree" onChange={handleCheckboxChange}/>
                             <label className="form-check-label" htmlFor="checkAgree">
                                 Entendo que uma vez confirmada a presença, ela será registrada na blockchain e não poderá ser alterada. 
                             </label>
@@ -93,6 +102,7 @@ const ModalRegisterAttendance = ({ evento }) => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 
