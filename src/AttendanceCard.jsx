@@ -6,6 +6,7 @@ import api from './js/axiosApi';
 const AttendanceCard = ({item}) => {
     const [showModal, setShowModal] = useState(false);
     const [pdfUrl, setPdfUrl] = useState(null);
+    console.log(item);
 
     const handleIssueCertificate = async () => {
         try {

@@ -32,9 +32,8 @@ const ModalRegisterAttendance = ({ evento, onAttendanceRegistered }) => {
         .then((response) => {
             if (response.status === 200) {
                 if (response.data) {
-                    // TODO: Adicionar feedback de sucesso
+
                     console.log("Presença registrada com sucesso");
-                    // window.location.reload();
                     setIsChecked(false);
                     onAttendanceRegistered(true, 'Presença registrada com sucesso!', 'success'); 
                     
